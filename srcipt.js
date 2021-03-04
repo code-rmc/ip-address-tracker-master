@@ -5,16 +5,11 @@ const mymap = L.map('mapid').setView([51.505, -0.09], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 18
+    maxZoom: 18,
+    tileSize: 512,
+    zoomOffset: -1
 }).addTo(mymap);
 
-/* L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-}).addTo(mymap); */
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -24,7 +19,7 @@ form.addEventListener("submit", (e) => {
 });
 
 async function ipLocation (ip) {
-    let local = await fetch(`http://ipwhois.app/json/${ip}`);
+    let local = await fetch(`https://ipwhois.app/json/${ip}`);
     let res = await local.json();
     geoLocation(res)
 }
